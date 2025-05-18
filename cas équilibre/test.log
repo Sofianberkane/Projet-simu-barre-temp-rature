@@ -1,0 +1,29 @@
+   22 :  + int1d(Th,3) (R*h*u*v)
+   23 :  + int1d(Th,2)(y*h*u*v)
+   24 :  - int1d(Th,3) (R*h*uA*v)
+   25 :  - int1d(Th,2) (y*h*uA*v)
+   26 :  + on(4,u=u0);
+   27 :
+   28 : thermique;
+   29 :
+   30 : // Sauvegarder les r√©sultats dans un fichier texte
+   31 : ofstream sortie1("resultats_eau.txt");
+   32 :
+   33 : real pasx=L/Nx;
+   34 :
+   35 : for(int n=0;n<Nx;n++)
+   36 :  {
+   37 :  sortie1<<n*pasx<<" "<<u(n*pasx,0)<<" "<<u(n*pasx,R)<<endl;
+   38 :  }
+   39 :
+   40 : plot(u,value=true,fill=true); sizestack + 1024 =3452  ( 2428 )
+ 
+  -- Square mesh : nb vertices  =1111 ,  nb triangles = 2000 ,  nb boundary edges 220 rmdup= 0
+  SkyLineMatrix: size pL/pU: 1111 103110 103110 moy=92.8083
+  -- Solve :
+          min 25  max 201.125
+times: compile 0.037s, execution 0.017s,  mpirank:0
+ ######## unfreed pointers   6221 Nb pointer,   0Bytes  ,  mpirank 0, memory leak =0
+ CodeAlloc : nb ptr  4101,  size :539408 mpirank: 0
+Ok: Normal End
+ try getConsole C:\Users\todo\Documents\Documents cours\U lille\simu\simu barre Èchauffement\cas Èquilibre\test.edp

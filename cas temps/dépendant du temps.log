@@ -1,0 +1,28 @@
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+  SkyLineMatrix: size pL/pU: 2211 406210 406210 moy=183.722
+  -- Solve :
+          min 25  max 200
+times: compile 0.065s, execution 86.46s,  mpirank:0
+ ######## unfreed pointers   11115196 Nb pointer,   0Bytes  ,  mpirank 0, memory leak =0
+ CodeAlloc : nb ptr  4274,  size :545784 mpirank: 0
+Ok: Normal End
+ try getConsole C:\Users\todo\Documents\Documents cours\U lille\simu\simu barre échauffement\cas temps\dépendant du temps.edp

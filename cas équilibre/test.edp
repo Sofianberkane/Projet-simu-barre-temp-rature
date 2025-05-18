@@ -1,0 +1,40 @@
+load "msh3"
+
+// Parameters
+real R=1;
+real L=20;
+real lambda = 230;
+real p = 1;
+real h=500;
+real uA=25;
+real u0=200;
+real Nx=100;
+real Ny=10;
+
+
+// Mesh
+mesh Th=square(Nx,Ny,[L*x,R*y]);
+fespace Vh(Th,P1);
+Vh u,v;
+
+problem thermique(u,v,solver=LU,tgv=1e5) =
+ int2d(Th)( lambda*(dx(u)*dx(v) + dy(u)*dy(v)))
+ + int1d(Th,3) (R*h*u*v)
+ + int1d(Th,2)(y*h*u*v)
+ - int1d(Th,3) (R*h*uA*v) 
+ - int1d(Th,2) (y*h*uA*v)
+ + on(4,u=u0);
+
+thermique;
+
+// Sauvegarder les résultats dans un fichier texte
+ofstream sortie1("resultats_eau.txt");
+
+real pasx=L/Nx;
+
+for(int n=0;n<Nx;n++)
+ {
+ sortie1<<n*pasx<<" "<<u(n*pasx,0)<<" "<<u(n*pasx,R)<<endl;
+ }
+
+plot(u,value=true,fill=true);

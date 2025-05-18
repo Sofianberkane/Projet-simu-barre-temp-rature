@@ -1,0 +1,65 @@
+load "msh3"
+
+// Paramètres
+real R = 0.1;
+real L = 2;
+real lambda = 230;
+real p = 2700;
+real c = 897;
+real h = 100;
+real uA = 25;
+real u0 = 200;
+real Nx = 200;
+real Ny = 10;
+real dt = 1;
+real tmax = 1000;
+real temps = 0;
+
+ofstream posR("posR_conv.txt");
+ofstream pos0("pos0.txt");
+
+// Maillage
+mesh Th = square(Nx, Ny, [L*x, R*y]);
+fespace Vh(Th, P1);
+Vh u, v, uold;
+uold = uA;
+
+
+// Boucle en temps
+for(int n=0 ;n<tmax/dt;n++) {
+// Problème thermique
+problem thermique(u, v, solver = LU, tgv = 1e5) =
+int2d(Th)( y*(u*v + lambda*dt/(p*c)*(dy(u)*dy(v) + dx(u)*dx(v))))
++ int1d(Th, 3)( h*dt/(p*c)*R*u*v )
++ int1d(Th, 2)( h*dt/(p*c)*y*u*v )
+- int2d(Th)( y*uold*v )
+- int1d(Th, 3)( h*dt/(p*c)*R*uA*v )
+- int1d(Th, 2)( h*dt/(p*c)*y*uA*v )
++ on(4, u = u0);
+
+
+thermique;
+
+uold = u;
+temps = temps + dt;
+
+// Sauvegarde tous les 100 pas
+    if (n % 100 == 0) {
+        // Extraction des points à y = R (bord haut)
+        for (int i = 0; i < Th.nv; i++) {
+            real xi = Th(i).x;
+            real yi = Th(i).y;
+            if (abs(yi - R) < 1e-6) {
+                posR << n*dt << " " << xi << " " << u[][i] << endl;
+            }
+            if (abs(yi) < 1e-6) {
+                pos0 << n*dt << " " << xi << " " << u[][i] << endl;
+            }
+        }
+        posR << endl;
+        pos0 << endl;
+    }
+
+plot(u, value = true, fill = true);
+
+}
